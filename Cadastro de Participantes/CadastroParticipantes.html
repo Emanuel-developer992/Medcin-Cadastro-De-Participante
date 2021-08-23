@@ -1,0 +1,999 @@
+<script type="text/javascript" src="/fluighub/assets/js/fluighub.js"></script>
+<div id="MyWidget_${instanceId}" class="super-widget wcm-widget-class fluig-style-guide" data-params="MyWidget.instance()">
+	<div id="termoAutorizacao">
+		<div class="panel panel-default">
+			<div class="termoAutorizacao">
+				<div class="row">
+					<div class="col-sm-12">
+						<h5 class="card-subtitle mb-2 text-muted">Termo de Autorização de Uso de Dados Pessoais</h5>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<p>Eu autorizo a coleta e inclusão de dados pessoais para o banco de dados da Medcin Instituto da Pele.</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+					    <div class="custom-radio custom-radio-inline custom-radio-primary">
+					        <input class="autorizacao dadosIniciais" type="radio" id="termo-autorizacao-sim" name="radioAutorizacao" value="sim">
+					        <label for="termo-autorizacao-sim">Sim</label>
+					    </div>
+					    <div class="custom-radio custom-radio-inline custom-radio-primary">
+					        <input class="autorizacao dadosIniciais" type="radio" id="termo-autorizacao-nao" name="radioAutorizacao" value="nao">
+					        <label for="termo-autorizacao-nao">Não</label>
+					    </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Abas -->
+	<ul class="nav nav-tabs clearfix" role="tablist">
+	    <li class="hide" id="li-dadosIniciais" onclick="changeHeader('dadosIniciais')">
+	    	<a href="#dadosIniciais" role="tab" data-toggle="tab">
+	    		Informações Iniciais
+	    	</a>
+	    </li>
+	    <li class="hide" id="li-dadosCadastrais" onclick="changeHeader('dadosCadastrais')">
+	    	<a href="#dadosCadastrais" role="tab" data-toggle="tab">
+	    		Dados Cadastrais do Participante
+	    	</a>
+	    </li>
+	    <li class="hide" id="li-dadosGerais" onclick="changeHeader('dadosGerais')">
+	    	<a href="#dadosGerais" role="tab" data-toggle="tab">
+	    		Informações Participantes
+	    	</a>
+	    </li>
+	    <li class="hide" id="li-classeSocial" onclick="changeHeader('classeSocial')">
+	    	<a href="#classeSocial" role="tab" data-toggle="tab">
+	    		Classe Social
+	    	</a>
+	    </li>
+	</ul>
+		
+	<!-- Dados Iniciais -->
+	<div class="hide container-fluid tab-pane" id="dadosIniciais">
+		<div class="row">
+			<div class="col-sm-2">
+				<label class="control-label">Data do Cadastro</label> 
+				<input id="dataCadastro" name="dataCadastro" type="text" class="form-control form-control-sm gravar dadosIniciais">
+			</div>
+			<div class="col-sm-2">
+				<label class="control-label">Data Nascimento</label> 
+				<input id="dataNascimento" name="dataNascimento" type="text" class="form-control form-control-sm calendar gravar dadosIniciais" 
+					onchange="preencheIdade();validacao()" 
+					data-fluig-required="true">
+			</div>
+			<div class="col-sm-6">
+				<label class="control-label">Nome Responsável</label> 
+				<input type="text" class="form-control form-control-sm gravar dadosIniciais" 
+					id="nomeResponsavel" name="nomeResponsavel" />
+			</div>
+			<div class="col-sm-2">
+				<label class="control-label">RG Responsável</label> 
+				<input type="text" class="form-control form-control-sm mAlfanum gravar dadosIniciais" 
+					id="rgResponsavel" name="rgResponsavel" rg-mask="00.000.000-0" 
+					onchange="defineMascaraCampo(this)"/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-2">
+				<label class="control-label">Celular do Responsável</label> 
+				<input type="text" class="form-control form-control-sm gravar dadosIniciais" 
+					id="celularResponsavel" name="celularResponsavel"/>
+			</div>
+			<div class="col-sm-10">
+				<label class="control-label">E-mail Responsável</label> 
+				<input type="text" class="form-control form-control-sm gravar dadosIniciais" 
+					id="emailResponsavel" name="emailResponsavel"/>
+			</div>
+		</div>
+		</br></br>
+		
+		<!-- Termo de Autorização do Responsável -->
+		<div class="hide" id="termoAutorizacaoResponsavel">
+			<div class="panel panel-default">
+				<div class="termoAutorizacao">
+					<div class="row">
+						<div class="col-sm-12">
+							<h5 class="card-subtitle mb-2 text-muted">Declaração de Responsabilidade</h5>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<p>Eu declaro que sou responsável legal pelo participante cadastrado e autorizo seu cadastro.</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-sm-12">
+						    <div class="custom-radio custom-radio-inline custom-radio-primary">
+						        <input type="radio" class="autorizacao dadosIniciais" id="responsavel-sim" name="radioResponsavel" value="sim">
+						        <label for="responsavel-sim">Sim</label>
+						    </div>
+						    <div class="custom-radio custom-radio-inline custom-radio-primary">
+						        <input type="radio" class="autorizacao dadosIniciais" id="responsavel-nao" name="radioResponsavel" value="nao">
+						        <label for="responsavel-nao">Não</label>
+						    </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<button type="button" class="btn btn-primary" id="btnDadosIniciais" name="btnDadosIniciais"
+				onclick="vldLiberacao('dadosIniciais', '')">
+					Próximo
+			</button>
+		</div>
+	</div>
+	
+	<!-- Dados Cadastrais -->
+	<div class="hide container-fluid tab-pane" id="dadosCadastrais">
+		<div class="row">
+			<div class="form-group col-sm-6">
+				<label class="control-label">Nome Completo</label> 
+				<input type="text" class="form-control form-control-sm gravar cadastraisObrigatorios" 
+					id="nomeComp" name="nomeComp" 
+					data-fluig-required="true"/>
+			</div>
+            <div class="form-group col-sm-2">
+            	<label class="control-label">Sexo</label> 
+                <select id="sexo" name="sexo" type="text" class="form-control form-control-sm gravar cadastraisObrigatorios"
+                	onchange="vldSexo(this);"
+                	data-fluig-required="true">
+                	<option value="">Selecione...</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Feminino</option>
+                </select>
+            </div>
+            <div class="form-group col-sm-2">
+            	<label class="control-label">RG</label> 
+                <input id="rg" name="rg" type="text" class="form-control form-control-sm mRg gravar cadastraisObrigatorios"
+                	data-fluig-required="true">
+            </div>
+            <div class="form-group col-sm-2">
+            	<label class="control-label">CPF</label> 
+                <input id="cpf" name="cpf" type="text" class="form-control form-control-sm mCpf gravar cadastraisObrigatorios"
+                	data-valida-participante
+                	data-fluig-required="true">
+            </div>
+		</div>
+		<div class="row">
+			<div class="form-group col-sm-2">
+            	<label class="control-label">Data de Nascimento</label> 
+            	<input id="dataNasc" name="dataNasc" type="text" class="form-control form-control-sm calendar gravar cadastraisObrigatorios">
+            </div>
+			<div class="form-group col-sm-1">
+                <label class="control-label">Idade</label>
+                <input id="idade" name="idade" type="text" class="form-control form-control-sm mInt gravar cadastraisObrigatorios">     	
+            </div>
+            <div class="form-group col-sm-2">
+                <label class="control-label">CEP da Resisdência</label>
+                <input id="cepResid" name="cepResid" type="text" class="form-control form-control-sm mCep gravar cadastraisObrigatorios"
+                	onchange="teste();"
+                	data-fluig-required="true">
+            </div>
+            <div class="form-group col-sm-3">
+                <label class="control-label">Endereço</label>
+                <input id="endereco" name="endereco" type="text" class="form-control form-control-sm gravar cadastraisObrigatorios" 
+                	placeholder="Rua/Av./Via/Estrada/Rodovia"
+                	data-fluig-required="true">
+            </div>
+            <div class="form-group col-sm-1">
+                <label class="control-label">N°</label>
+                <input id="numero" name="numero" type="number" class="form-control form-control-sm gravar cadastraisObrigatorios"
+                	data-fluig-required="true">
+            </div>
+            <div class="form-group col-sm-3">
+                <label class="control-label">Complemento</label>
+                <input id="complemento" name="complemento" type="text" class="form-control form-control-sm gravar cadastraisObrigatorios"
+                	data-fluig-required="true">
+            </div>
+		</div>
+		<div class="row">
+			<div class="form-group col-sm-3">
+                <label class="control-label">Bairro</label>
+                <input id="bairro" name="bairro" type="text" class="form-control form-control-sm gravar cadastraisObrigatorios"
+                	data-fluig-required="true">
+            </div>
+	        <div class="form-group col-sm-3">
+	            <label class="control-label">Cidade/Município</label>
+	            <input id="cidade" name="cidade" type="text" class="form-control form-control-sm gravar cadastraisObrigatorios"
+	            	data-fluig-required="true">
+	        </div>
+	        <div class="form-group col-sm-3">
+	            <label class="control-label">Estado</label>
+	            <input id="estado" name="estado" type="text" class="form-control form-control-sm gravar cadastraisObrigatorios"
+	            	data-fluig-required="true">
+	        </div>
+	        <div class="form-group col-sm-3">
+	            <label class="control-label">País</label>
+	            <input id="pais" name="pais" type="text" class="form-control form-control-sm gravar cadastraisObrigatorios"
+	            	data-fluig-required="true">
+	        </div>
+        </div>
+        <div class="row">
+        	<div class="form-group col-sm-3">
+                <label class="control-label">Celular de Contato</label>
+                <input id="cContato" name="cContato" type="text" class="form-control form-control-sm gravar cadastraisObrigatorios"
+                	data-fluig-required="true">
+            </div>
+            <div class="form-group col-sm-3">
+                <label class="control-label">Telefone de Contato</label>
+                <input id="tContato" name="tContato" type="text" class="form-control form-control-sm gravar cadastraisObrigatorios"
+                	data-fluig-required="true">
+            </div>
+            <div class="form-group col-sm-3">
+                <label class="control-label">Telefone para Recado</label>
+                <input id="tRecado" name="tRecado" type="text" class="form-control form-control-sm gravar cadastraisObrigatorios"
+                	data-fluig-required="true">
+            </div>
+            <div class="form-group col-sm-3">
+                <label class="control-label">Nome do Contato para Recado</label>
+                <input id="nRecado" name="nRecado" type="text" class="form-control form-control-sm gravar cadastraisObrigatorios"
+                	data-fluig-required="true">
+            </div>
+        </div> 
+        
+        <!-- Botão para adicionar os contatos -->
+       	<h5 class="card-subtitle mb-2 text-muted">Contatos</h5>
+		
+		<div class="row">
+			<div class="form-group col-sm-6">
+                <label class="control-label">Nome</label>
+               	<input type="text" id="nomeContato" name="nomeContato" class="form-control form-control-sm gravar"
+					data-fluig-write="true"/>
+            </div>
+			<div class="form-group col-sm-6">
+				<label class="control-label">Telefone</label>
+				<input type="text" id="telefoneContato" name="telefoneContato" class="form-control form-control-sm gravar"
+					data-fluig-write="true"/>
+			</div>
+		</div>
+		
+		 <script type="text/template" class="template_itens_actions">
+		    <button class="btn btn-primary" data-datatable-add-row="">Adicionar Contato</button>
+	    	<button class="btn btn-primary" data-datatable-del-row="">Remover Contato</button>
+		</script>
+		
+		<div class="col-md-12" id="tb_contatos" data-isolated-scroll="" style="zoom: 1;">
+		</div>
+		
+		<!-- <button type="button" class="btn btn-primary" data-insere-linha">
+			Adicionar Contato
+		</button>
+		Tabela de Contatos
+		<div class="table-responsive">
+			<table class="table table-hover table-striped table-sm" tablename="tb_contatos" 
+				id="tb_contatos" noaddbutton="false" nodeletebutton="false">
+				<thead>
+					<tr>
+						<th>Nome</th>
+						<th>Telefone</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div> -->
+		
+		<div class="row">
+			<div class="form-group col-sm-6">
+                <label class="control-label">E-mail</label>
+                <input id="email" name="email" type="text" class="form-control form-control-sm gravar" 
+                	placeholder="Em caso de menor, não conter um e-mail próprio, informar do responsável legal"
+                	data-fluig-write="true">
+            </div>
+            <div class="form-group col-sm-3">
+                <label class="control-label">Instagram</label>
+                <input id="instagram" name="instagram" type="text" class="form-control form-control-sm gravar"
+                	data-fluig-write="true">
+            </div>
+            <div class="form-group col-sm-3">
+                <label class="control-label">Facebook</label>
+                <input id="facebook" name="facebook" type="text" class="form-control form-control-sm gravar"
+                	data-fluig-write="true">
+            </div>
+		</div>
+		<div class="row">
+			<button type="button" class="btn btn-primary" id="btnDadosCadastrais" name="btnDadosCadastrais"
+				onclick="vldLiberacao('dadosCadastrais','cadastraisObrigatorios')">
+					Próximo
+			</button>
+		</div>
+	</div>
+	
+	<!-- Dados Gerais -->
+	<div class="hide container-fluid tab-pane" id="dadosGerais">
+		
+		<!-- Definição de Fototipo -->
+		<div class="panel panel-default">
+           	<div class="panel-heading">
+           		<h4 class="card-title mb-2 text-muted">Definição Fototipo</h4>
+			</div>
+               <div class="panel-body">
+               	<div class="row">
+               		<div class="form-group col-sm-4">
+                       	<label class="control-label">Cor dos seus olhos?</label>
+                       	<select id="corOlhos" name="corOlhos" class="form-control form-control-sm gravar geraisObrigatorios"
+                       		onchange="defineFototipo()"
+                       		data-fluig-required="true">
+                       		<option value="">Selecione...</option>
+                           	<option value="1">Azul</option>
+                           	<option value="2">Verde</option>
+                           	<option value="3">Mel, Castanho Claro</option>
+                           	<option value="4">Castanho Escuro</option>
+                       	</select>
+                   	</div>
+                   	<div class="form-group col-sm-4">
+                       	<label class="control-label">Cor natural dos seus cabelos?</label>
+                       	<select id="corCabelos" name="corCabelos" class="form-control form-control-sm gravar geraisObrigatorios"
+                       		onchange="defineFototipo()"
+                       		data-fluig-required="true">
+                           	<option value="">Selecione...</option>
+                           	<option value="1">Ruivo, avermelhado</option>
+                            	<option value="2">Loiro</option>
+                            	<option value="3">Castanho Claro</option>
+                            	<option value="4">Castanho Escuro</option>
+                            	<option value="5">Preto</option>
+                        	</select>
+                   	</div>
+                   	<div class="form-group col-sm-4">
+                       	<label class="control-label">Cor natural da sua pele?</label>
+                       	<select id="corPele" name="corPele" class="form-control form-control-sm gravar geraisObrigatorios"
+                       		onchange="defineFototipo()"
+                       		data-fluig-required="true">
+                           	<option value="">Selecione...</option>
+                           	<option value="1">Branca Palída</option>
+                            	<option value="2">Branca</option>
+                            	<option value="3">Morena Clara</option>
+                            	<option value="4">Morena Escura</option>
+                            	<option value="5">Negra</option>
+                        	</select>
+                   	</div>
+               	</div>
+				<div class="row">
+					<div class="form-group col-sm-8">
+                       	<label class="control-label">Após exposição SOLAR, sua pele:</label>
+                       	<select id="exposicaoSolar" name="exposicaoSolar" class="form-control form-control-sm gravar geraisObrigatorios"
+                       		onchange="defineFototipo()"
+                       		data-fluig-required="true">
+                           	<option value="">Selecione...</option>
+                           	<option value="1">Queima (vermelhidão) com facilidade, nunca bronzeia</option>
+                            	<option value="2">Queima (vermelhidão) com facilidade, bronzeia muito pouco</option>
+                            	<option value="3">Queima (Vermelhidão) moderadamente, bronzeia moderadamente</option>
+                            	<option value="4">Queima (vermelhidão) pouco, bronzeia com facilidade</option>
+                            	<option value="5">Queima (vermelhidão) raramente, bronzeia bastante</option>
+                            	<option value="6">Nunca Queima (vermelhidão), pele muito pigmentada (escura)</option>
+                        	</select>
+                   	</div>
+					<div class="form-group col-sm-4"
+						data-fluig-required="true">
+                        	<label class="control-label">Seu Fototipo Conforme Respondido, é:</label>
+                        	<input id="fototipoResp" name="fototipoResp" type="text" class="form-control form-control-sm gravar" readonly>
+                    	</div>
+				</div>
+           	</div>
+		</div>
+		
+		<!-- Definição sensibilidade da Pele -->
+		<div class="panel panel-default">
+            <div class="panel-heading">
+            	<h4 class="card-title mb-2 text-muted">Definição sensibilidade da Pele</h4>
+            </div>
+            <div class="panel-body">
+            	<div class="row">
+            		<div class="form-group col-sm-7">
+                    	<label class="control-label">Sua pele fica sensível, com vermelhidão e/ou coceira em dias de temperaturas muito quente e/ou frio?</label>
+	                    <select id="reacaoTemperatura" name="reacaoTemperatura" class="form-control form-control-sm gravar geraisObrigatorios"
+	                    	onchange="defineSensibilidadePele()"
+	                    	data-fluig-required="true">
+	                    	<option value="">Selecione...</option>
+	                    	<option value="S">Sim</option>
+	                        <option value="N">Não</option>
+	                    </select>
+                	</div>
+                	<div class="form-group col-sm-5">
+	                   	<label class="control-label">Sua pele costuma descamar (descascar) ao redor do nariz e boca?</label>
+	                    <select id="descamar" name="descamar" class="form-control form-control-sm gravar geraisObrigatorios" 
+	                    	onchange="defineSensibilidadePele()"
+	                    	data-fluig-required="true">
+	                    	<option value="">Selecione...</option>
+	                    	<option value="S">Sim</option>
+	                        <option value="N">Não</option>
+	                    </select>
+	               	</div>
+	               	<div class="form-group col-sm-6">
+                    	<label class="control-label">Sua pele fica sensível, com vermelhindão e/ou coceira após uso de sabonete?</label>
+	                    <select id="reacaoSabonete" name="reacaoSabonete" class="form-control form-control-sm gravar geraisObrigatorios"
+	                    	onchange="defineSensibilidadePele()"
+	                    	data-fluig-required="true">
+	                    	<option value="">Selecione...</option>
+	                    	<option value="S">Sim</option>
+	                        <option value="N">Não</option>
+	                    </select>
+                	</div>
+	               	<div class="form-group col-sm-6 reacaoTonico hide">
+	                   	<label class="control-label">Sua pele fica sensível, com vermelhidão e/ou coceira após uso de tônicos?</label>
+	                    <select id="reacaoTonico" name="reacaoTonico" class="form-control form-control-sm gravar geraisObrigatorios"
+	                    	onchange="defineSensibilidadePele()">
+	                    	<option value="">Selecione...</option>
+	                    	<option value="S">Sim</option>
+	                        <option value="N">Não</option>
+	                    </select>
+	               	</div>
+	               	<div class="form-group col-sm-6 reacaoPosBarba hide">
+	                   	<label class="control-label">Sua pele fica sensível, com vermelhindão e/ou coceira ao utilizar pós barba?</label>
+	                    <select id="reacaoPosBarba" name="reacaoPosBarba" class="form-control form-control-sm gravar geraisObrigatorios"
+	                    	onchange="defineSensibilidadePele()">
+	                    	<option value="">Selecione...</option>
+	                    	<option value="S">Sim</option>
+	                        <option value="N">Não</option>
+	                    </select>
+	               	</div>
+	               	<div class="form-group col-sm-6">
+	                   	<label class="control-label">A sensibilidade da sua pele, mediante as respostas enviadas, é considerada:</label>
+	                    <input id="sensibilidadeResp" name="sensibilidadeResp" type="text" class="form-control form-control-sm gravar" readonly>
+	               	</div>
+               </div>
+            </div> 
+		</div>
+		
+		<!-- Definição do Perfil da Pele do Rosto -->
+		<div class="panel panel-default">
+        	<div class="panel-heading">
+            	<h4 class="card-title mb-2 text-muted">Definição do Perfil da Pele do Rosto</h4>
+            </div>
+            <div class="panel-body">
+            	<div class="row">
+            		<div class="form-group col-sm-6">
+                    	<label class="control-label">Como você classificaria sua pele do rosto?</label>
+                    	<select id="classificacaoPeleRosto" name="classificacaoPeleRosto" class="form-control form-control-sm gravar geraisObrigatorios"
+                    		data-fluig-required="true">
+	                        <option value="">Selecione...</option>
+	                        <option value="1">Hiratada</option>
+	                        <option value="2">Ressecada</option>
+	                        <option value="3">Mista, oleosidade somente na testa nariz e queixo</option>
+	                        <option value="4">Oleosa</option>
+	                        <option value="5">Normal</option>
+                 		</select>
+                	</div>
+                	<div class="form-group col-sm-6 classificacaoEvelhecimentoPele hide">
+                    	<label class="control-label">Como você classificaria o evelhecimento da sua pele?</label>
+                    	<select id="classificacaoEvelhecimentoPele" name="classificacaoEvelhecimentoPele" class="form-control form-control-sm gravar geraisObrigatorios">
+	                        <option value="">Selecione...</option>
+	                        <option value="1">Tenho rugas e linhas de expessões intensas</option>
+		                    <option value="2">Tenhos rugas e linhas de expressões moderadas</option>
+		                    <option value="3">Tenhos rugas e linhas de expressões leves</option>
+		                    <option value="4">Não tenho rugas e linhas de expressão</option>
+                 		</select>
+                	</div>
+            		<div class="form-group col-sm-6 classificacaoManchasFacial hide">
+                    	<label class="control-label">Como você classificaria as manchas da sua pele facial?</label>
+                    	<select id="classificacaoManchasFacial" name="classificacaoManchasFacial" class="form-control form-control-sm gravar geraisObrigatorios">
+	                        <option value="">Selecione...</option>
+	                        <option value="1">Tenho manchas intensas</option>
+		                    <option value="2">Tenho manchas moderadas</option>
+		                    <option value="3">Tenho manchas leves</option>
+		                    <option value="4">Não tenho manchas</option>
+                 		</select>
+                	</div>
+                	<div class="form-group col-sm-6 tipoDepilacao hide">
+                    	<label class="control-label">Você tem o habito de se depilar/barbear? Se sim, quais tipos utiliza?</label>
+                    	<select id="tipoDepilacao" name="tipoDepilacao" class="form-control form-control-sm gravar geraisObrigatorios">
+	                        <option value="">Selecione...</option>
+	                        <option value="1">Não tenho o hábito</option>
+                    		<option value="2">Cera</option>
+                    		<option value="3">Lamina (tipo Gilette)</option>
+                    		<option value="4">Aparelho depilatório</option>
+                   			<option value="5">Laser</option>
+                 		</select>
+                	</div>
+            		<div class="form-group col-sm-6 classificacaoOlheiras hide">
+                    	<label class="control-label">Como você classificaria as bolsas e olheiras do seu rosto?</label>
+                    	<select id="classificacaoOlheiras" name="classificacaoOlheiras" class="form-control form-control-sm gravar geraisObrigatorios">
+	                        <option value="">Selecione...</option>
+	                        <option value="1">Tenho bolsas e olheiras intensas</option>
+                    		<option value="2">Tenho bolsas e olheiras moderadas</option>
+                    		<option value="3">Tenho bolsas e olheiras leves</option>
+                    		<option value="4">Não tenho bolsas e olheiras</option>
+                 		</select>
+                	</div>
+                	<div class="form-group col-sm-6">
+                    	<label class="control-label">Qual a fequência do surgimento de ESPINHAS no seu rosto?</label>
+                    	<select id="fequenciaEspinhas" name="fequenciaEspinhas" class="form-control form-control-sm gravar geraisObrigatorios"
+                    		data-fluig-required="true">
+	                        <option value="">Selecione...</option>
+	                        <option value="1">Sempre tenho espinha no rosto</option>
+                               <option value="2">As vezes, sem motivo aparente</option>
+                               <option value="3">Somente próximo ao ciclo menstrual</option>
+                               <option value="4">Não tenho espinhas</option>
+                 		</select>
+                	</div>
+                </div>
+            </div>
+		</div>
+		
+		<!-- Definição do Perfil do Cabelo -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+            	<h4 class="card-title mb-2 text-muted">Definição do Perfil do Cabelo</h4>
+            </div>
+            <div class="panel-body">
+            	<div class="row">	
+            		<div class="form-group col-sm-6">
+                    	<label class="control-label">Qual o seu tipo de cabelo?</label>
+                    	<select id="tipoCabelo" name="tipoCabelo" class="form-control form-control-sm gravar geraisObrigatorios"
+                    		data-fluig-required="true">
+	                        <option value="">Selecione...</option>
+	                        <option value="1">Liso</option>
+		                    <option value="2">Ondulado</option>
+		                    <option value="3">Enrolado</option>
+		                    <option value="4">Crespo</option>
+                 		</select>
+                	</div>
+                	<div class="form-group col-sm-6">
+                    	<label class="control-label">Quais procedimentos você faz nos cabelos com frequência?</label>
+                    	<select id="procedimentoCapilar" name="procedimentoCapilar" class="form-control form-control-sm gravar geraisObrigatorios"
+                    		data-fluig-required="true">
+	                        <option value="">Selecione...</option>
+	                        <option value="1">Alisamento/Progressiva</option>
+		                    <option value="2">Tintura</option>
+		                    <option value="3">Luzes</option>
+		                    <option value="4">Mega hair</option>
+		                    <option value="5">Nenhum, meu cabelo está virgem</option>
+                 		</select>
+                	</div>
+	           		<div class="form-group col-sm-6">
+	                   	<label class="control-label">Em relação a CASPAS no couro cabeludo, você:</label>
+	                   	<select id="caspas" name="caspas" class="form-control form-control-sm gravar geraisObrigatorios"
+	                   		data-fluig-required="true">
+	                        <option value="">Selecione...</option>
+	                        <option value="1">Intensa quantidade de caspas</option>
+		                    <option value="2">Moderada quantidade de caspas</option>
+		                    <option value="3">Leve quantidade de caspas</option>
+		                    <option value="4">Não tenho caspas</option>
+	                		</select>
+	               	</div>
+	               	<div class="form-group col-sm-6">
+	                   	<label class="control-label">Em relação a QUEDA CAPILAR, você:</label>
+	                   	<select id="quedaCapilar" name="quedaCapilar" class="form-control form-control-sm gravar geraisObrigatorios"
+	                   		data-fluig-required="true">
+	                        <option value="">Selecione...</option>
+	                        <option value="1">Tenho muita queda capilar</option>
+		                    <option value="2">Tenho queda capilar moderada</option>
+		                    <option value="3">Não tenho queda capilar</option>
+	                		</select>
+	               	</div>
+               </div>
+            </div>
+        </div>
+		
+		<!-- Definição do Perfil Corporal -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+            	<h4 class="card-title mb-2 text-muted">Definição do Perfil Corporal</h4>
+            </div>
+            <div class="panel-body">
+            	<div class="row">
+            		<div class="form-group col-sm-6">
+                    	<label class="control-label">Como você classificaria sua pele do corpo?</label>
+                    	<select id="classificacaoPele" name="classificacaoPele" class="form-control form-control-sm gravar geraisObrigatorios"
+                    		data-fluig-required="true">
+	                        <option value="">Selecione...</option>
+	                        <option value="Hidratada">Hidratada</option>
+		                    <option value="Ressecada">Ressecada</option>
+		                    <option value="Normal">Normal</option>
+                 		</select>
+                	</div>
+                	<div class="form-group col-sm-6 classificacaoCelulites hide">
+                    	<label class="control-label">Como você classificaria suas CELULITES?</label>
+                    	<select id="classificacaoCelulites" name="classificacaoCelulites" class="form-control form-control-sm gravar geraisObrigatorios">
+	                        <option value="">Selecione...</option>
+	                        <option value="1">Tenho celulite intesa</option>
+                    		<option value="2">Tenho celulite moderado</option>
+                    		<option value="3">Tenho celulite leve</option>
+                    		<option value="4">Não tenho celulite</option>
+                 		</select>
+                	</div>
+	           		<div class="form-group col-sm-6 classificacaoEstrias hide">
+	                   	<label class="control-label">Como você classifica suas ESTRIAS?</label>
+	                   	<select id="classificacaoEstrias" name="classificacaoEstrias" class="form-control form-control-sm gravar geraisObrigatorios">
+	                        <option value="">Selecione...</option>
+	                        <option value="1">Tenho muitas estrias</option>
+		                    <option value="2">Tenho estria de forma moderada</option>
+		                    <option value="3">Tenho poucas estrias</option>
+		                    <option value="4">Não tenho estrias</option>
+	                		</select>
+	               	</div>
+	               	<div class="form-group col-sm-6 classificacaoUnhas hide">
+	                   	<label class="control-label">Como você classificaria suas UNHAS?</label>
+	                   	<select id="classificacaoUnhas" name="classificacaoUnhas" class="form-control form-control-sm gravar geraisObrigatorios">
+	                        <option value="">Selecione...</option>
+	                        <option value="1">Muito fracas, descamandas e não crescem</option>
+		                    <option value="2">Fracas, quebram com frequência</option>
+		                    <option value="3">Normal, unhas saudáveis</option>
+		                    <option value="4">Muito fortes, não quebram com facilidade</option>
+	                		</select>
+	               	</div>
+	           		<div class="form-group col-sm-6 pelosAxilas hide">
+	                   	<label class="control-label">Sobre os pêlos das axilas, você:</label>
+	                   	<select id="pelosAxilas" name="pelosAxilas" class="form-control form-control-sm gravar geraisObrigatorios">
+	                        <option value="">Selecione...</option>
+	                        <option value="1">Depilo com frequência</option>
+		                    <option value="2">Não depilo mas depilaria se necessário</option>
+		                    <option value="3">Não depilo</option>
+	                		</select>
+	               	</div>
+	               	<div class="form-group col-sm-6 transpiracao hide">
+	                   	<label class="control-label">Sobre sua transpiração/suor, você a considera:</label>
+	                   	<select id="transpiracao" name="transpiracao" class="form-control form-control-sm gravar geraisObrigatorios">
+	                        <option value="">Selecione...</option>
+	                        <option value="1">Excessiva, suo muito</option>
+		                    <option value="2">Normal</option>
+		                    <option value="3">Não suo, dificilmente transpiro</option>
+	                		</select>
+	               	</div>
+               </div>
+            </div>
+        </div>
+		
+		<!-- Saúde e Hábitos -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+            	<h4 class="card-title mb-2 text-muted">Saúde e Hábitos</h4>
+            </div>
+            <div class="panel-body">
+            	<div class="row">
+            		<div class="form-group col-sm-12">
+	                   	<label class="control-label">Possui histórico de alergias e/ou irritações (descamação, vermelhidão, coceira, rachaduras, etc) frequentes na pele?</label>
+	                   	<select id="historicoAlergias" name="historicoAlergias" class="form-control form-control-sm gravar geraisObrigatorios"
+	                   		data-fluig-required="true">
+	                        <option value="">Selecione...</option>
+	                        <option value="Sim, com frequência">Sim, com frequência</option>
+		                    <option value="Às vezes">Às vezes</option>
+		                    <option value="Não">Não</option>
+	                		</select>
+	               	</div>
+            		<div class="form-group col-sm-7">
+                    	<label class="control-label">Quais produtos cosméticos você ultiliza com frequência?</label>
+                    	<!--<select id="cosmeticosUtilizados" name="cosmeticosUtilizados" class="form-control form-control-sm gravar geraisObrigatorios"
+                    		data-fluig-required="true">
+	                        <option value="">Selecione...</option>
+	                        <option value="1">Protetor solar</option>
+		                    <option value="2">Cremes antienvelhecimento</option>
+		                    <option value="3">Maquiagem (rímel, pó compacto, base, batom)</option>
+		                    <option value="4">Hidratantes para o corpo</option>
+		                    <option value="5">Perfumes</option>
+		                    <option value="6">Desodorantes e Antitranspirante</option>
+		                    <option value="7">Cremes para os cabelos</option>
+		                    <option value="8">Esmaltes</option>
+		                    <option value="9">Óleo corporal</option>
+                 		</select>-->
+
+                        <div class="clearfix"></div>
+
+                        <div class="custom-checkbox custom-checkbox-inline custom-checkbox-warning">
+                            <input type="checkbox" id="cosmetico-1">
+                            <label for="cosmetico-1">Protetor solar</label>
+                        </div>
+                        <div class="custom-checkbox custom-checkbox-inline custom-checkbox-warning">
+                            <input type="checkbox" id="cosmetico-2">
+                            <label for="cosmetico-2">Cremes antienvelhecimento</label>
+                        </div>
+                        <div class="custom-checkbox custom-checkbox-inline custom-checkbox-warning">
+                            <input type="checkbox" id="cosmetico-3">
+                            <label for="cosmetico-3">Maquiagem (rímel, pó compacto, base, batom)</label>
+                        </div>
+                        <div class="custom-checkbox custom-checkbox-inline custom-checkbox-warning">
+                            <input type="checkbox" id="cosmetico-4">
+                            <label for="cosmetico-4">Hidratantes para o corpo</label>
+                        </div>
+                        <div class="custom-checkbox custom-checkbox-inline custom-checkbox-warning">
+                            <input type="checkbox" id="cosmetico-5">
+                            <label for="cosmetico-5">Perfumes</label>
+                        </div>
+                        <div class="custom-checkbox custom-checkbox-inline custom-checkbox-warning">
+                            <input type="checkbox" id="cosmetico-6">
+                            <label for="cosmetico-6">Desodorantes e Antitranspirante</label>
+                        </div>
+                        <div class="custom-checkbox custom-checkbox-inline custom-checkbox-warning">
+                            <input type="checkbox" id="cosmetico-7">
+                            <label for="cosmetico-7">Cremes para os cabelos</label>
+                        </div>
+                        <div class="custom-checkbox custom-checkbox-inline custom-checkbox-warning">
+                            <input type="checkbox" id="cosmetico-8">
+                            <label for="cosmetico-8">Esmaltes</label>
+                        </div>
+                        <div class="custom-checkbox custom-checkbox-inline custom-checkbox-warning">
+                            <input type="checkbox" id="cosmetico-9">
+                            <label for="cosmetico-9">Óleo corporal</label>
+                        </div>
+
+                	</div>
+
+                    <div class="clearfix"></div>
+
+	               	<div class="form-group col-sm-6">
+	                   	<label class="control-label">Você tem disponibilidade de ficar no Centro quantas horas durante os dias de semana?</label>
+	                   	<select id="disponibilidade" name="disponibilidade" class="form-control form-control-sm gravar geraisObrigatorios"
+	                   		data-fluig-required="true">
+	                        <option value="">Selecione...</option>
+	                        <option value="1">Entre 1 e 2 horas no máximo</option>
+		                    <option value="2">Até 4 horas</option>
+		                    <option value="3">Até 6 horas</option>    
+		                    <option value="4">Mais de 6 horas</option>
+	                		</select>
+	               	</div>
+	           		<div class="form-group col-sm-6 cicloMenstrual hide">
+	                   	<label class="control-label">Em relação ao ciclo mentrual, você:</label>
+	                   	<select id="cicloMenstrual" name="cicloMenstrual" class="form-control form-control-sm gravar geraisObrigatorios">
+	                        <option value="">Selecione...</option>
+	                        <option value="1">Ciclo regular com uso de anticoncepcional</option>
+		                    <option value="2">Ciclo regular sem uso de anticoncepcional</option>
+		                    <option value="3">Ciclo irregular com uso de anticoncepcional</option>
+		                    <option value="4">Ciclo irregular sem uso de anteconcepcional</option>
+		                    <option value="5">Pré menopausa(Climatério)</option>
+		                    <option value="6">Menopausa</option>
+	                		</select>
+	               	</div>
+	           		<div class="form-group col-sm-6">
+	                   	<label class="control-label">Faz o uso de medicamento de uso contínuo?</label>
+	                   	<select id="usoMedicamentos" name="usoMedicamentos" class="form-control form-control-sm gravar geraisObrigatorios"
+	                   		data-fluig-required="true">
+	                        <option value="">Selecione...</option>
+	                        <option value="S">Sim</option>
+	                   		<option value="N">Não</option>
+	                		</select>
+	                </div>
+	               	<div class="form-group col-sm-6">
+	                   	<label class="control-label">Atualmente, você pratica algum tipo de esporte?</label>
+	                   	<select id="praticaEsportes" name="praticaEsportes" class="form-control form-control-sm gravar geraisObrigatorios"
+	                   		data-fluig-required="true">
+	                        <option value="">Selecione...</option>
+	                        <option value="S">Sim</option>
+	                   		<option value="N">Não</option>
+	                		</select>
+	               	</div>
+	           		<div class="form-group col-sm-6">
+	                   	<label class="control-label">Atualmente você fuma?</label>
+	                   	<select id="fuma" name="fuma" class="form-control form-control-sm gravar geraisObrigatorios"
+	                   		data-fluig-required="true">
+	                        <option value="">Selecione...</option>
+	                        <option value="S">Sim</option>
+	                   		<option value="N">Não</option>
+	                		</select>
+	               	</div>
+	               	<div class="form-group col-sm-6">
+	                   	<label class="control-label">Atualmente ingere bebidas alcoólicas?</label>
+	                   	<select id="bebidaAlcoolica" name="bebidaAlcoolica" class="form-control form-control-sm gravar geraisObrigatorios"
+	                   		data-fluig-required="true">
+	                        <option value="">Selecione...</option>
+	                        <option value="S">Sim</option>
+	                   		<option value="N">Não</option>
+	                		</select>
+	               	</div>
+            	</div>
+        	</div>
+		</div>
+		<div class="row">
+			<button type="button" class="btn btn-primary" id="btnDadosGerais" name="btnDadosGerais"
+				onclick="vldLiberacao('dadosGerais','geraisObrigatorios')">
+					Próximo
+			</button>
+		</div>
+	</div>
+		
+	<div class="hide container-fluid tab-pane" id="classeSocial">
+		<div class="row">
+			<div class="col-sm-2">
+				<label class="control-label">Banheiros</label> 
+				<select class="form-control form-control-sm gravar sociaisObrigatorios" id="qtdBanheiros" name="qtdBanheiros"
+					onchange="defineClasseSocial()"
+					data-fluig-required="true">
+					<option value="">Selecione...</option>
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4 ou +</option>
+				</select>
+			</div>
+			<div class="col-sm-2">
+				<label class="control-label">Empregados Domésticos</label> 
+				<select class="form-control form-control-sm gravar sociaisObrigatorios" id="qtdEmpregados" name="qtdEmpregados"
+					onchange="defineClasseSocial()"
+					data-fluig-required="true">
+					<option value="">Selecione...</option>
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4 ou +</option>
+				</select>
+			</div>
+			<div class="col-sm-2">
+				<label class="control-label">Automóveis</label> 
+				<select class="form-control form-control-sm gravar sociaisObrigatorios" id="qtdAutomoveis" name="qtdAutomoveis"
+					onchange="defineClasseSocial()"
+					data-fluig-required="true">
+					<option value="">Selecione...</option>
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4 ou +</option>
+				</select>
+			</div>
+			<div class="col-sm-2">
+				<label class="control-label">Microcomputadores</label> 
+				<select class="form-control form-control-sm gravar sociaisObrigatorios" id="qtdMicrocomputadores" name="qtdMicrocomputadores"
+					onchange="defineClasseSocial()"
+					data-fluig-required="true">
+					<option value="">Selecione...</option>
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4 ou +</option>
+				</select>
+			</div>
+			<div class="col-sm-2">
+				<label class="control-label">Lava louça</label> 
+				<select class="form-control form-control-sm gravar sociaisObrigatorios" id="qtdLavaLoucas" name="qtdLavaLoucas"
+					onchange="defineClasseSocial()"
+					data-fluig-required="true">
+					<option value="">Selecione...</option>
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4 ou +</option>
+				</select>
+			</div>
+			<div class="col-sm-2">
+				<label class="control-label">Geladeira</label> 
+				<select class="form-control form-control-sm gravar sociaisObrigatorios" id="qtdGeladeiras" name="qtdGeladeiras"
+					onchange="defineClasseSocial()"
+					data-fluig-required="true">
+					<option value="">Selecione...</option>
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4 ou +</option>
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-2">
+				<label class="control-label">Freezer</label> 
+				<select class="form-control form-control-sm gravar sociaisObrigatorios" id="qtdFreezer" name="qtdFreezer"
+					onchange="defineClasseSocial()"
+					data-fluig-required="true">
+					<option value="">Selecione...</option>
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4 ou +</option>
+				</select>
+			</div>
+			<div class="col-sm-2">
+				<label class="control-label">Lava roupa</label> 
+				<select class="form-control form-control-sm gravar sociaisObrigatorios" id="qtdLavaRoupas" name="qtdLavaRoupas"
+					onchange="defineClasseSocial()"
+					data-fluig-required="true">
+					<option value="">Selecione...</option>
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4 ou +</option>
+				</select>
+			</div>
+			<div class="col-sm-2">
+				<label class="control-label">DVD</label> 
+				<select class="form-control form-control-sm gravar sociaisObrigatorios" id="qtdDVD" name="qtdDVD"
+					onchange="defineClasseSocial()"
+					data-fluig-required="true">
+					<option value="">Selecione...</option>
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4 ou +</option>
+				</select>
+			</div>
+			<div class="col-sm-2">
+				<label class="control-label">Microondas</label> 
+				<select class="form-control form-control-sm gravar sociaisObrigatorios" id="qtdMicroondas" name="qtdMicroondas"
+					onchange="defineClasseSocial()"
+					data-fluig-required="true">
+					<option value="">Selecione...</option>
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4 ou +</option>
+				</select>
+			</div>
+			<div class="col-sm-2">
+				<label class="control-label">Motocicleta</label> 
+				<select class="form-control form-control-sm gravar sociaisObrigatorios" id="qtdMotocicletas" name="qtdMotocicletas"
+					onchange="defineClasseSocial()"
+					data-fluig-required="true">
+					<option value="">Selecione...</option>
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4 ou +</option>
+				</select>
+			</div>
+			<div class="col-sm-2">
+				<label class="control-label">Secador de roupa</label> 
+				<select class="form-control form-control-sm gravar sociaisObrigatorios" id="qtdSecadorRoupas" name="qtdSecadorRoupas"
+					onchange="defineClasseSocial()"
+					data-fluig-required="true">
+					<option value="">Selecione...</option>
+					<option value="0">0</option>
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4 ou +</option>
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<label class="control-label">Grau de instrução do chefe da família:</label> 
+				<select class="form-control form-control-sm gravar sociaisObrigatorios" id="grauInstrucao" name="grauInstrucao"
+					onchange="defineClasseSocial()"
+					data-fluig-required="true">
+					<option value="">Selecione...</option>
+					<option value="0">Analfabeto / Fundamental I incompleto</option>
+					<option value="1">Fundamental I completo / Fundamental II incompleto</option>
+					<option value="2">Fundamental II completo / Médio incompleto</option>
+					<option value="3">Médio completo / Superior incompleto</option>
+					<option value="4">Superior completo</option>
+				</select>
+			</div>
+			<div class="col-sm-3">
+				<label class="control-label">Água encanada?</label> 
+				<select class="form-control form-control-sm gravar sociaisObrigatorios" id="aguaEncanada" name="aguaEncanada"
+					onchange="defineClasseSocial()"
+					data-fluig-required="true">
+					<option value="">Selecione...</option>
+					<option value="S">Sim</option>
+					<option value="N">Não</option>
+				</select>
+			</div>
+			<div class="col-sm-3">
+				<label class="control-label">Rua pavimentada?</label> 
+				<select class="form-control form-control-sm gravar sociaisObrigatorios" id="ruaPavimentada" name="ruaPavimentada"
+					onchange="defineClasseSocial()"
+					data-fluig-required="true">
+					<option value="">Selecione...</option>
+					<option value="S">Sim</option>
+					<option value="N">Não</option>
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+				<label class="control-label">Classe Social</label> 
+				<input id="resultClasseSocial" name="resultClasseSocial" class="form-control form-control-sm gravar sociaisObrigatorios"/>
+			</div>
+		</div>
+		<div class="row">
+			<button type="button" data-start-process class="btn btn-primary" id="btnSalvar" name="btnSalvar">Salvar Cadastro</button>
+		</div>
+	</div>
+	</br>
+	</br>
+</div>
+
